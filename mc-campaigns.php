@@ -25,7 +25,8 @@ if($_POST['clear']){
 		foreach($lists['data'] as $list){
 			$options['lists'][] = array(
 				'id' => $list['id'],
-				'name' => $list['name']);
+				'name' => $list['name'],
+				'count' => $list['stats']['member_count']);
 		}
 		$options['apikey'] = $mc_apikey;
 		$options['content'] == false;

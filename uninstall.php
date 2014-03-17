@@ -2,6 +2,6 @@
 
 if(defined('WP_UNINSTALL_PLUGIN') ){
 
-	delete_option('goalWP');
-  
+	delete_option('mcWP');
+
 }

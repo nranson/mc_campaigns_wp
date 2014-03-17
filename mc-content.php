@@ -7,12 +7,13 @@
     }).disableSelection();
   });
   </script>
+<div style="background-color:#52BAD5;color:white;max-width:60%">Alright!  You're in the right place to start building your campaign.  We've pulled in your site's RSS campaign automagically.  From here, drag the article summaries you want to the green area to the right.  Don't worry, that background color won't come through to your campaign.</div>
+
 <?php
 $mcWP = get_option('mcWP');
 function mcCampaign(){
 	$mcWP = get_option('mcWP');
 	if($_POST['content']){
-		echo "CONTENT!";
 		try{
 			include(plugin_dir_path( __FILE__ ).'/lib/Mailchimp.php');
 		    //$mcWP = get_option('mcWP');
@@ -74,7 +75,7 @@ mcWPfeed();?>
 	</div>
 	<div style="width:50%;float:right;">
 		<h1>Campaign Content</h1>
-		<h4>Settings</h4>
+		<strong>Settings</strong><small><a href="http://kb.mailchimp.com/article/how-do-i-change-the-subject-reply-to-address-and-from-name-on-my-signup-for#tips">[?]</a></small><br/>
 		<form method="post" action="<? echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']);?>&campaign=publish" accept-charset="UTF-8">
 			<input type="text" placeholder="From Email" name="from_email"><br />
 			<input type="text" placeholder="From Name" name="from_name"><br />
@@ -84,10 +85,12 @@ mcWPfeed();?>
 				foreach($mcWP['lists'] as $list){
 					?><option value="<?php echo $list['id']?>"><?php echo $list['name'];?></option><?
 				};?></select><br />
-        	<small>Drag your content to this area.</small>
-  			<ul id="sortable2" class="connectedSortable" draggable="false" style="max-width:400px;overflow-y:scroll;max-height:500px;">
-  			<li></li>
-  			</ul>
+        <div style="background-color:#C5E5DE;max-width:400px;padding:20px;border-radius:10px;">
+          <small>Drag your content to this area.</small>
+    			<ul id="sortable2" class="connectedSortable" draggable="false" style="max-width:400px;overflow-y:scroll;max-height:500px;">
+    			     <li></li>
+    			</ul>
+        </div>
   			<input type="submit">
      	</form>
   	</div>

@@ -10,11 +10,12 @@ Author URI: http://www.mailchimp.com
 		load_plugin_textdomain('mc_campaigns', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 		function get_scripts(){
-			wp_register_script('mc_drag', plugins_url().'/scripts/drag.js', array('jquery-ui'), null);
-			admin_enqueue_script('jquery');
-			admin_enqueue_script('jquery-ui');
-			admin_enqueue_script('mc_drag');
+			wp_enqueue_script('jquery');
+			wp_enqueue_script('jquery-ui');
+			wp_enqueue_script('mc_drag', plugins_url('scripts/drag.js', __FILE__));
 		};
+
+		add_action('admin_enqueue_scripts', 'get_scripts');
 
 		function mc_posts_actions() {
 			add_posts_page("Build New Campaign", "Build New Campaign", 1, "MCBuilder", "mc_posts");
@@ -31,7 +32,6 @@ Author URI: http://www.mailchimp.com
 		};
 
 		function mc_admin_actions() {
-			add_action('wp_enqueue_scripts', 'get_scripts');
 			add_options_page("MailChimp Curator", "MailChimp Curator", 1, "MCCurator", "mc_admin");
 		};
 

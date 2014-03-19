@@ -1,14 +1,4 @@
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-  <script>
-    $(function() {
-    $( "#sortable1, #sortable2" ).sortable({
-      connectWith: ".connectedSortable"
-    }).disableSelection();
-  });
-  </script>
 <div style="background-color:#52BAD5;color:white;max-width:60%">Alright!  You're in the right place to start building your campaign.  We've pulled in your site's RSS campaign automagically.  From here, drag the article summaries you want to the green area to the right.  Don't worry, that background color won't come through to your campaign.</div>
-
 <?php
 $mcWP = get_option('mcWP');
 function mcCampaign(){

@@ -9,10 +9,13 @@ Author URI: http://www.mailchimp.com
 */
 		load_plugin_textdomain('mc_campaigns', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
+		//I think I'm doing this correctly?  -- http://pippinsplugins.com/loading-scripts-correctly-in-the-wordpress-admin/
+
 		function get_scripts(){
 			wp_enqueue_script('jquery');
 			wp_enqueue_script('jquery-ui');
-			wp_enqueue_script('mc_drag', plugins_url('scripts/drag.js', __FILE__));
+			wp_register_script('mc_drag', plugins_url('scripts/drag.js', __FILE__), array('jquery-ui'));
+			wp_enqueue_script('mc_drag');
 		};
 
 		add_action('admin_enqueue_scripts', 'get_scripts');

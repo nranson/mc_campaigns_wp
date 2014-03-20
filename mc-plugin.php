@@ -11,11 +11,13 @@ Author URI: http://www.mailchimp.com
 
 		//I think I'm doing this correctly?  -- http://pippinsplugins.com/loading-scripts-correctly-in-the-wordpress-admin/
 
-		function get_scripts(){
-			wp_enqueue_script('jquery');
-			wp_enqueue_script('jquery-ui');
-			wp_register_script('mc_drag', plugins_url('scripts/drag.js', __FILE__), array('jquery-ui'));
-			wp_enqueue_script('mc_drag');
+		function get_scripts($hook){
+			if($hook != 'edit.php' && $_GET['page'] != 'MCBuilder') return;
+				wp_enqueue_script('jquery');
+				wp_enqueue_script('jquery-ui');
+				wp_enqueue_script('jquery-ui-sortable');
+				wp_register_script('sortable', plugins_url('scripts/drag.js', __FILE__), array('jquery-core', 'jquery-ui-core'));
+				wp_enqueue_script('sortable');
 		};
 
 		add_action('admin_enqueue_scripts', 'get_scripts');

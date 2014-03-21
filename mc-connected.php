@@ -15,8 +15,8 @@ function mcWPstats(){
 		<div>
 			Awesome!  We're able to connect with your MailChimp account.  Just to serve as proof, here's some lists that we pulled in as evidence.
 		</div>
-		<table style="width:60%;">
-			<tr style="background-color:#52BAD5;color:white;">
+		<table>
+			<tr>
 				<th>List Name</th>
 				<th>Number of Subscribers</th>
 			</tr>
@@ -24,7 +24,7 @@ function mcWPstats(){
 		foreach($mcWP['lists'] as $list){
 			?><tr>
 					<td><?echo $list['name'];?></td>
-					<td style="text-align:center;"><?echo $list['count'];?></td>
+					<td><?echo $list['count'];?></td>
 				</tr>
 		<?
 		}

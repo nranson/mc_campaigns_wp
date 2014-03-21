@@ -78,7 +78,7 @@ foreach($mcWP['lists'] as $list){
 };?>
 		</select>
 		<br />
-		<div style="background-color:#C5E5DE;max-width:400px;padding:20px;border-radius:10px;">
+		<div>
 			<small>Drag your content to this area.</small>
 			<ul id="sortable2" class="connectedSortable" draggable="false" style="max-width:400px;overflow-y:scroll;max-height:500px;">
 			<li></li>

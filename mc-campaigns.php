@@ -24,9 +24,9 @@ if($_POST['clear']){
 		$lists = $api->lists->getList();
 		foreach($lists['data'] as $list){
 			$options['lists'][] = array(
-				'id' => $list['id'],
-				'name' => $list['name'],
-				'count' => $list['stats']['member_count']);
+					'id' => $list['id'],
+					'name' => $list['name'],
+					'count' => $list['stats']['member_count']);
 		}
 		$options['apikey'] = $mc_apikey;
 		$options['content'] == false;
@@ -35,7 +35,7 @@ if($_POST['clear']){
 	catch(Mailchimp_Error $e){
 		if($e->getMessage()){
 			?><div class="error"><?php echo $e->getMessage();?></div><?
-			delete_option('mcWP');
+				delete_option('mcWP');
 		}
 	}
 };

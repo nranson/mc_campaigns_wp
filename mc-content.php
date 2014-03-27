@@ -1,4 +1,4 @@
-<div>Alright!  You're in the right place to start building your campaign.  We've pulled in your site's RSS campaign automagically.  From here, drag the article summaries you want to the green area to the right.  Don't worry, that background color won't come through to your campaign.</div>
+<div>Alright!  You're in the right place to start building your campaign.  We've pulled in your site's RSS feed, automagically.</div>
 <?php
 $mcWP = get_option('mcWP');
 function mcCampaign(){
@@ -36,8 +36,23 @@ function mcCampaign(){
 };
 
 function mcWPfeed(){
-	$feed = 'http://blog.mailchimp.com/?feed=rss2';
-	//$feed = get_bloginfo_rss('rss_url');
+
+	/*
+	Hey there --
+
+	If you're looking at this line, you are probably in need
+	of some extra articles to include in your feed to test
+	with.  If that's the case, you'll want to un-comment the
+	first "$feed" variable below and comment out the second
+	"$feed" variable with two forward slashes.  You can also
+	replace the MailChimp blog with any URL you want to test
+	with.
+
+	Thanks for playing along!
+	*/
+
+	//$feed = 'http://blog.mailchimp.com/?feed=rss2';
+	$feed = get_bloginfo_rss('rss_url');
 	$open = simplexml_load_file($feed) or die("<div class=\"error\">Couldn't access your feed. Please check to make sure your feed is public.  If it is publicly accessible, make sure the feed also <a href=\"http://validator.w3.org/feed\">validates</a>.</div>");
 	?><ul id="sortable1" class="connectedSortable"><li></li><?
 		foreach ($open->channel->item as $item){

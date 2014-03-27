@@ -9,11 +9,24 @@ function mcWPclear(){
 		</div>
 		<?
 };
+
+function mcWPupdate(){
+	?>
+		<div>
+			<form method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+				<input type="hidden" name="update" value="Y">
+				<input type="submit" value="<?php echo __('Refresh MailChimp', 'mcWP');?>">
+			</form>
+		</div>
+		<?
+};
+
+
 function mcWPstats(){
 	$mcWP = get_option('mcWP');
 	?><h1>You're connected.</h1>
 		<div>
-			Awesome!  We're able to connect with your MailChimp account.  Just to serve as proof, here's some lists that we pulled in as evidence.
+			Awesome!  We're able to connect with your MailChimp account.  Here's some lists that we pulled from your account.
 		</div>
 		<table>
 			<tr>
@@ -38,4 +51,5 @@ function mcWPstats(){
 		<?
 };
 mcWPstats();
+mcWPupdate();
 mcWPclear();

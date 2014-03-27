@@ -26,12 +26,6 @@ function mc_posts_actions() {
 	add_posts_page("Build New Campaign", "Build New Campaign", 1, "MCBuilder", "mc_posts");
 };
 
-add_action('admin_menu', 'mc_admin_actions');
-$mcWP = get_option('mcWP');
-if(!empty($mcWP['apikey'])){
-	add_action('admin_menu', 'mc_posts_actions');
-};
-
 function mc_admin() {
 	include(plugin_dir_path( __FILE__ ).'/mc-campaigns.php');
 };
@@ -43,3 +37,10 @@ function mc_admin_actions() {
 function mc_posts(){
 	include(plugin_dir_path(__FILE__).'/mc-content.php');
 }
+
+$mcWP = get_option('mcWP');
+if(!empty($mcWP['apikey'])){
+	add_action('admin_menu', 'mc_posts_actions');
+};
+
+add_action('admin_menu', 'mc_admin_actions');

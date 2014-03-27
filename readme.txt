@@ -1,4 +1,4 @@
-=== MailChimp Goal for WordPress ===
+=== MailChimp Campaign Builder for WordPress ===
 Contributors: mc_nate
 Tags: MailChimp, MailChimp campaigns, email, drag and drop, mailchimp templates
 Requires at least: 3.8
@@ -7,7 +7,7 @@ Stable tag: 1.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Create MailChimp campaigns out of your WordPress posts by dragging and dropping individual posts.  Fill in the campaign details, pick your list, and your campaign is ready.  All finishing touches can be made within MailChimp's campaign editor and the final campaign sent out from your MailChimp account.
+Create MailChimp campaigns out of your WordPress posts by dragging and dropping individual posts.
 
 == Description ==
 

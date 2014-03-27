@@ -9,16 +9,8 @@ function mcWPcontent(){
 	}
 };
 
-?>
-
-<div class="wrap">
-<?php
-
-if($_POST['clear']){
-	delete_option('mcWP');
-}elseif($_POST['mcapi']){
-	include(plugin_dir_path( __FILE__ ).'/lib/Mailchimp.php');
-	$mc_apikey = trim(strip_tags($_POST['mcapi']));
+function mc_get_lists($mc_apikey){
+include(plugin_dir_path( __FILE__ ).'/lib/Mailchimp.php');
 	try{
 		$api = new Mailchimp($mc_apikey);
 		$lists = $api->lists->getList();
@@ -38,6 +30,21 @@ if($_POST['clear']){
 				delete_option('mcWP');
 		}
 	}
+}
+
+?>
+
+<div class="wrap">
+<?php
+
+if($_POST['clear']){
+	delete_option('mcWP');
+}elseif($_POST['update']){
+	$mcWP = get_option('mcWP');
+	mc_get_lists($mcWP['apikey']);
+}elseif($_POST['mcapi']){
+	$mc_apikey = trim(strip_tags($_POST['mcapi']));
+	mc_get_lists($mc_apikey);
 };
 if($_POST['full']){
 	$options['content'] = true;

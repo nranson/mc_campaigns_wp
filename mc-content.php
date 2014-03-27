@@ -3,6 +3,9 @@
 $mcWP = get_option('mcWP');
 function mcCampaign(){
 	$mcWP = get_option('mcWP');
+	if($_POST['subject_line'] && empty($_POST['content'])){
+		?><div class="error">Uh oh.  We're missing some valueable stuff, here.  Make sure you've filled out the required area AND added content!</div><?
+	};
 	if($_POST['content']){
 		try{
 			include(plugin_dir_path( __FILE__ ).'/lib/Mailchimp.php');
@@ -27,6 +30,7 @@ function mcCampaign(){
 						'std_content00' => $content));
 
 			$campaign = $api->campaigns->create($type, $opts, $mc_content);
+			?><div class="success">Awesome!  We've created your campaign!  <a href="http://login.mailchimp.com" target="_blank">Log in</a> to your MailChimp account to make any final changes.</div><?
 		}catch (Mailchimp_Error $e){
 			if($e->getMessage()){
 				?><div class="error"><?php echo $e->getMessage();?></div><?
@@ -54,7 +58,7 @@ function mcWPfeed(){
 	//$feed = 'http://blog.mailchimp.com/?feed=rss2';
 	$feed = get_bloginfo_rss('rss_url');
 	$open = simplexml_load_file($feed) or die("<div class=\"error\">Couldn't access your feed. Please check to make sure your feed is public.  If it is publicly accessible, make sure the feed also <a href=\"http://validator.w3.org/feed\">validates</a>.</div>");
-	?><ul id="sortable1" class="connectedSortable"><li></li><?
+	?><ul id="sortable1" class="connectedSortable" style="cursor:move;"><li></li><?
 		foreach ($open->channel->item as $item){
 			$title = '<h2 class="title"><a href="'.$item->link.'">'.$item->title.'</a></h2>';
 			$pubdate = '<small><label class="label label-info">Published:</label> '.date("D M j g:i", strtotime($item->pubDate)).'</small><br />';
@@ -80,11 +84,11 @@ mcWPfeed();?>
 	</div>
 	<div style="width:50%;float:right;">
 		<h1>Campaign Content</h1>
-		<strong>Settings</strong><small><a href="http://kb.mailchimp.com/article/how-do-i-change-the-subject-reply-to-address-and-from-name-on-my-signup-for#tips">[?]</a></small><br/>
+		<strong>Settings</strong><small><a href="http://kb.mailchimp.com/article/how-do-i-change-the-subject-reply-to-address-and-from-name-on-my-signup-for#tips" target="_blank">[?]</a></small><br/>
 		<form method="post" action="<? echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']);?>&campaign=publish" accept-charset="UTF-8">
-		<input type="text" placeholder="From Email" name="from_email"><br />
-		<input type="text" placeholder="From Name" name="from_name"><br />
-		<input type="text" placeholder="Subject Line" name="subject_line"><br />
+		<input type="text" placeholder="From Email" name="from_email" required><br />
+		<input type="text" placeholder="From Name" name="from_name" required><br />
+		<input type="text" placeholder="Subject Line" name="subject_line" required><br />
 		<select name="list_id">
 <?
 foreach($mcWP['lists'] as $list){
@@ -95,7 +99,7 @@ foreach($mcWP['lists'] as $list){
 		<br />
 		<div>
 			<small>Drag your content to this area.</small>
-			<ul id="sortable2" class="connectedSortable" draggable="false" style="max-width:400px;overflow-y:scroll;max-height:500px;">
+			<ul id="sortable2" class="connectedSortable" draggable="false" style="max-width:400px;overflow-y:scroll;max-height:500px;cursor:move;">
 			<li></li>
 			</ul>
 		</div>

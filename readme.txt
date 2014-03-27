@@ -39,5 +39,12 @@ From your MailChimp dashboard:
 
 == Changelog ==
 
+= 1.01 =
+* Thanks to our rad QA team, I fixed a host of issues.
+* Added clearer success/error messaging on campaign building step.
+* Fixed required fields for campaign builder.
+* Added cursor CSS to make it clear what's drag/drop-able.
+* Added a way to refresh lists on the Setup without having to disconnect/reconnect.
+
 = 1.0 =
 * Initial release of MailChimp Campaigns for WordPress.

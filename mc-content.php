@@ -4,11 +4,11 @@ $mcWP = get_option('mcWP');
 function mcCampaign(){
 	$mcWP = get_option('mcWP');
 	if($_POST['subject_line'] && empty($_POST['content'])){
-		?><div class="error">Uh oh.  We're missing some valueable stuff, here.  Make sure you've filled out the required area AND added content!</div><?
+		?><div class="error">Uh oh.  We're missing some valueable stuff, here.  Make sure you've filled out the required area AND added content!</div><?php
 	};
 	if($_POST['content']){
 		try{
-			include(plugin_dir_path( __FILE__ ).'/lib/Mailchimp.php');
+			require_once(plugin_dir_path( __FILE__ ).'/lib/Mailchimp.php');
 			//$mcWP = get_option('mcWP');
 			$content = str_replace("\\", "", html_entity_decode(implode("<br /><div style=\"clear:both;\" /><hr /></div><br />", $_POST['content']), ENT_NOQUOTES,'UTF-8'));
 
@@ -30,7 +30,7 @@ function mcCampaign(){
 						'std_content00' => $content));
 
 			$campaign = $api->campaigns->create($type, $opts, $mc_content);
-			?><div class="success">Awesome!  We've created your campaign!  <a href="http://login.mailchimp.com" target="_blank">Log in</a> to your MailChimp account to make any final changes.</div><?
+			?><div class="success">Awesome!  We've created your campaign!  <a href="http://login.mailchimp.com" target="_blank">Log in</a> to your MailChimp account to make any final changes.</div><?php
 		}catch (Mailchimp_Error $e){
 			if($e->getMessage()){
 				?><div class="error"><?php echo $e->getMessage();?></div><?
@@ -56,7 +56,7 @@ function mcWPfeed(){
 	*/
 
 	//$feed = 'http://blog.mailchimp.com/?feed=rss2';
-	$feed = get_bloginfo_rss('rss_url');
+	$feed = get_bloginfo_rss('rss2_url');
 	$open = simplexml_load_file($feed) or die("<div class=\"error\">Couldn't access your feed. Please check to make sure your feed is public.  If it is publicly accessible, make sure the feed also <a href=\"http://validator.w3.org/feed\">validates</a>.</div>");
 	?><ul id="sortable1" class="connectedSortable" style="cursor:move;"><li></li><?
 		foreach ($open->channel->item as $item){
@@ -65,10 +65,11 @@ function mcWPfeed(){
 			$content = $item->children('http://purl.org/rss/1.0/modules/content/');
 			$full = $title.$pubdate.$item->description;
 			$encode = htmlentities($full, ENT_QUOTES | ENT_IGNORE, "UTF-8");
-			echo '<li class="ui-state-default"><div class="item" style="display:block;clear:both;">'.$full;
-			echo '<p><input checked type="hidden" name="content[]" value="'.$encode.'"></p><hr /></div></li>';
+			?><li class="ui-state-default"><div class="item" style="display:block;clear:both;"><?php
+			echo $full;?>
+			<p><input checked type="hidden" name="content[]" value="<?php echo $encode;?>"></p><hr /></div></li><?php
 		};
-	?></ul><?
+	?></ul><?php
 };
 ?>
 <div>
@@ -78,7 +79,7 @@ function mcWPfeed(){
 			max-width:100%;
 		}
 		</style>
-<?
+<?php
 mcCampaign();
 mcWPfeed();?>
 	</div>
@@ -90,7 +91,7 @@ mcWPfeed();?>
 		<input type="text" placeholder="From Name" name="from_name" required><br />
 		<input type="text" placeholder="Subject Line" name="subject_line" required><br />
 		<select name="list_id">
-<?
+<?php
 foreach($mcWP['lists'] as $list){
 	?>
 			<option value="<?php echo $list['id']?>"><?php echo $list['name'];?></option><?

@@ -15,7 +15,7 @@ require_once 'Mailchimp/Gallery.php';
 require_once 'Mailchimp/Exceptions.php';
 
 class Mailchimp {
-    
+
     public $apikey;
     public $ch;
     public $root = 'https://api.mailchimp.com/2.0';
@@ -133,7 +133,7 @@ class Mailchimp {
 
 
         $this->ch = curl_init();
-        curl_setopt($this->ch, CURLOPT_USERAGENT, 'GoalWP MailChimp PHP 2.0');
+        curl_setopt($this->ch, CURLOPT_USERAGENT, 'MailChimp Campaigns PHP 2.0');
         curl_setopt($this->ch, CURLOPT_POST, true);
         curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($this->ch, CURLOPT_HEADER, false);
@@ -192,7 +192,7 @@ class Mailchimp {
             throw new Mailchimp_HttpError("API call to $url failed: " . curl_error($ch));
         }
         $result = json_decode($response_body, true);
-        
+
         if(floor($info['http_code'] / 100) >= 4) {
             throw $this->castError($result);
         }
@@ -222,5 +222,3 @@ class Mailchimp {
         if($this->debug) error_log($msg);
     }
 }
-
-

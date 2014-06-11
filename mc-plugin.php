@@ -4,7 +4,7 @@
    Plugin URI: http://kb.mailchimp.com/article/how-do-i-use-goals-tracking/
    Description: Curate your RSS feed to create MailChimp campaigns.
    Author: Nate Ranson
-   Version: 1.0
+   Version: 1.02
    Author URI: http://www.mailchimp.com
  */
 load_plugin_textdomain('mc_campaigns', false, basename( dirname( __FILE__ ) ) . '/languages' );

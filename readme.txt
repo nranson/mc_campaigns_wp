@@ -2,8 +2,8 @@
 Contributors: mc_nate
 Tags: MailChimp, MailChimp campaigns, email, drag and drop, mailchimp templates
 Requires at least: 3.8
-Tested up to: 3.8
-Stable tag: 1.0
+Tested up to: 3.9
+Stable tag: 1.02
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -11,8 +11,7 @@ Create MailChimp campaigns out of your WordPress posts by dragging and dropping 
 
 == Description ==
 
-Some stuff.
-
+MailChimp Campaigns pulls the descriptions from your WordPress's RSS feed and lets you drag them into a MailChimp campaign.  You can configure the list, campaign settings, and drag/drop to rearrange the content within your WordPress dashboard.  MailChimp Campaigns then builds the campaign right within your MailChimp account.  You can navigate back to MailChimp to add the finishing touches to your content, modify your template, or add some extra images before you send.
 == Installation ==
 
 1. Upload `mailchimp-campaigns` to the `/wp-content/plugins/` directory.
@@ -32,13 +31,16 @@ From your MailChimp dashboard:
 
 [Where can I find my API Key?](http://kb.mailchimp.com/article/where-can-i-find-my-api-key)
 
+= Does MailChimp Campaigns actually *send* campaigns from WordPress? =
+
+MailChimp Campaigns does not send any campaigns.  It just builds a skeleton campaign out of your WordPress posts.  To send the campaign, you'll have to log in to your MailChimp account to edit your final draft.
+
 == Screenshots ==
 
 1. Connect with your MailChimp API Key.
 2. Drag and drop WordPress items into a MailChimp campaign.
 
 == Changelog ==
-
 = 1.01 =
 * Thanks to our rad QA team, I fixed a host of issues.
 * Added clearer success/error messaging on campaign building step.
